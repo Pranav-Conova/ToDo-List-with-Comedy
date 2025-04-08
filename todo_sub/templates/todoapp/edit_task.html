@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Task</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fff8e1;
+            color: #333;
+            padding: 2rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff4081;
+            text-align: center;
+            animation: wobble 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        form {
+            background-color: #fff3e0;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: 2rem auto;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #e65100;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 2px solid #ffe0b2;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #4db6ac;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00897b;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #00796b;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 2;
+            position: relative;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: float 10s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100vh) rotate(360deg); }
+            100% { transform: translateY(0) rotate(720deg); }
+        }
+
+        @keyframes wobble {
+            0% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+            100% { transform: rotate(-1deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>✏️ Edit Your Task</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">💾 Save Changes</button>
+    </form>
+    <a href="{% url 'task_list' %}">🔙 Back to ToDo List</a>
+
+    <script>
+        const emojis = ['😂', '📝', '💡', '📋', '🎯', '🤣', '🎉', '🤓'];
+        const count = 20;
+
+        for (let i = 0; i < count; i++) {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.top = Math.random() * 100 + 'vh';
+            emoji.style.animationDuration = (5 + Math.random() * 10) + 's';
+            emoji.style.fontSize = (1 + Math.random() * 2) + 'rem';
+
+            document.body.appendChild(emoji);
+        }
+    </script>
+</body>
+</html>

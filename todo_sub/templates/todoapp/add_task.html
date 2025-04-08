@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Task</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fefbd8;
+            color: #444;
+            padding: 2rem;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff6f61;
+            animation: bounce 1s infinite alternate;
+            position: relative;
+            z-index: 2;
+        }
+
+        form {
+            background-color: #fff9c4;
+            display: inline-block;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        button {
+            margin-top: 1rem;
+            background-color: #ffcc80;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #ffa726;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: float 10s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+            100% {
+                transform: translateY(0) rotate(720deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>📝 Add a New Task</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">🚀 Add Task</button>
+    </form>
+
+    <script>
+        const emojis = ['😂', '🙈', '🤪', '🎉', '💼', '😅', '📋', '🧠'];
+        const count = 20;
+
+        for (let i = 0; i < count; i++) {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.top = Math.random() * 100 + 'vh';
+            emoji.style.animationDuration = (5 + Math.random() * 10) + 's';
+            emoji.style.fontSize = (1 + Math.random() * 2) + 'rem';
+
+            document.body.appendChild(emoji);
+        }
+    </script>
+</body>
+</html>
